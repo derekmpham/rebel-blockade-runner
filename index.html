@@ -7,6 +7,7 @@
 <body>
 	<script src="js/three.min.js"></script>
 	<script src="js/OrbitControls.js"></script>
+	<script src="js/Detector.js"></script>
 	<script>
 		// set up global variables
 		var scene, camera, renderer, skyboxMesh;
@@ -29,17 +30,23 @@
 			// load cube textures
 			var urlPrefix = "models/";
 			var urls = [urlPrefix + "front.png", urlPrefix + "back.png", urlPrefix + "left.png", urlPrefix + "right.png", urlPrefix + "up.png", urlPrefix + "down.png"];
-			var textureCube = THREE.ImageUtils.loadTextureCube(urls);
+			var textureCube = THREE.CubeTextureLoader(urls);
 
 			// initialize shader
-			var shader = THREE.ShaderUtils.lib["cube"];
+			var shader = THREE.ShaderLib["cube"];
 			var uniforms = THREE.UniformsUtils.clone(shader.uniforms);
 			uniforms['tCube'].texture = textureCube;
-			var material = new THREE.MeshShaderMaterial({
+			var material = new THREE.ShaderMaterial({
 				fragmentShader: shader.fragmentShader,
 				vertexShader: shader.vertexShader,
 				uniforms: uniforms
 			});
+
+			// create cube
+			// build skybox mesh
+			skyboxMesh = new THREE.Mesh(new THREE.CubeGeometry(100000, 100000, 100000, 1, 1, 1, null, true), material);
+			// add cube to scene
+			scene.add(skyboxMesh);
 
 			// create renderer and add to DOM
 			renderer = new THREE.WebGLRenderer({antialias:true});
