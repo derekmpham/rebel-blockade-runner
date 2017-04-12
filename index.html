@@ -42,6 +42,15 @@
 			// add orbit controls so that we can pan around with mouse
 			controls = new THREE.OrbitControls(camera, renderer.domElement);
 		}
+
+		// renders scene and updates render as needed
+		function animate() {
+			requestAnimationFrame(animate);
+
+			// render scene
+			renderer.render(scene, camera);
+			controls.update();
+		}
 	</script>
 </body>
 </html>
