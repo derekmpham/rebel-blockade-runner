@@ -16,6 +16,11 @@
 
 		// set up scene
 		function init() {
+			// test if webgl is supported
+			if (!Detector.webgl) {
+				Detector.addGetWebGLMessage();
+			}
+
 			// create scene and set scene size
 			scene = new THREE.Scene();
 			var WIDTH = window.innerWidth,
