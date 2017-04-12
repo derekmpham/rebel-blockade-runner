@@ -7,5 +7,29 @@
 <body>
 	<script src="js/three.min.js"></script>
 	<script src="js/OrbitControls.js"></script>
+	<script>
+		// set up global variables
+		var scene, camera, renderer;
+
+		init();
+		animate();
+
+		// set up scene
+		function init() {
+			// create scene and set scene size
+			scene = new THREE.Scene();
+			var WIDTH = window.innerWidth,
+				HEIGHT = window.innerHeight;
+
+			// create renderer and add to DOM
+			renderer = new THREE.WebGLRenderer({antialias:true});
+			renderer.setSize(WIDTH, HEIGHT);
+			document.body.appendChild(renderer.domElement);
+
+			// create camera and add it to scene
+			camera = new THREE.PerspectiveCamera(45, WIDTH/HEIGHT, 1, 100000);
+			scene.add(camera);
+		}
+	</script>
 </body>
 </html>
