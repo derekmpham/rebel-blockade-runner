@@ -29,6 +29,18 @@
 			// create camera and add it to scene
 			camera = new THREE.PerspectiveCamera(45, WIDTH/HEIGHT, 1, 100000);
 			scene.add(camera);
+
+			// create event listener that resizes renderer with browser window
+			window.addEventListener('resize', function() {
+				var WIDTH = window.innerWidth,
+					HEIGHT = window.innerHeight;
+				renderer.setSize(WIDTH, HEIGHT);
+				camera.aspect = WIDTH/HEIGHT;
+				camera.updateProjectionMatrix();
+			});
+
+			// add orbit controls so that we can pan around with mouse
+			controls = new THREE.OrbitControls(camera, renderer.domElement);
 		}
 	</script>
 </body>
