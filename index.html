@@ -9,7 +9,7 @@
 	<script src="js/OrbitControls.js"></script>
 	<script>
 		// set up global variables
-		var scene, camera, renderer;
+		var scene, camera, renderer, skyboxMesh;
 
 		init();
 		animate();
@@ -25,6 +25,11 @@
 			scene = new THREE.Scene();
 			var WIDTH = window.innerWidth,
 				HEIGHT = window.innerHeight;
+
+			// load cube textures
+			var urlPrefix = "models/";
+			var urls = [urlPrefix + "front.png", urlPrefix + "back.png", urlPrefix + "left.png", urlPrefix + "right.png", urlPrefix + "up.png", urlPrefix + "down.png"];
+			var textureCube = THREE.ImageUtils.loadTextureCube(urls);
 
 			// create renderer and add to DOM
 			renderer = new THREE.WebGLRenderer({antialias:true});
