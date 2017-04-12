@@ -31,6 +31,16 @@
 			var urls = [urlPrefix + "front.png", urlPrefix + "back.png", urlPrefix + "left.png", urlPrefix + "right.png", urlPrefix + "up.png", urlPrefix + "down.png"];
 			var textureCube = THREE.ImageUtils.loadTextureCube(urls);
 
+			// initialize shader
+			var shader = THREE.ShaderUtils.lib["cube"];
+			var uniforms = THREE.UniformsUtils.clone(shader.uniforms);
+			uniforms['tCube'].texture = textureCube;
+			var material = new THREE.MeshShaderMaterial({
+				fragmentShader: shader.fragmentShader,
+				vertexShader: shader.vertexShader,
+				uniforms: uniforms
+			});
+
 			// create renderer and add to DOM
 			renderer = new THREE.WebGLRenderer({antialias:true});
 			renderer.setSize(WIDTH, HEIGHT);
